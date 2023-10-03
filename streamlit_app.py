@@ -33,12 +33,11 @@ st.sidebar.title("Secretary GPT")
 st.sidebar.markdown("""
 ## Instructions
 1. Choose to record audio or upload an audio file.
-2. To get started, tell your secretary what to write down
+2. If recording audio, make sure that the app has permision to access the microphone.
 3. If recording audio, speak clearly and enunciate your words. When finished, stop the recording.
 4. If uploading an audio file, select the file from your device and upload it.
 5. Wait for the audio to be transcribed into text.
-6. Wait for the secretary to write the requested document.
-7. Download the generated document in text format.
+6. Download the generated document in text format.
 -  By Moris Polanco
         """)
 
