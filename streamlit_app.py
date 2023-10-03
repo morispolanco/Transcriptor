@@ -23,10 +23,9 @@ def transcribe(audio_file):
     return transcript
 
 
-st.image("https://asesorialinguistica.online/wp-content/uploads/2023/04/Secretary-GPT.png")
+st.image("https://arjeapps.com/wp-content/uploads/2023/10/secretary.jpg")
 
-st.write("Click on the microphone and tell your GPT secretary what to type.")
-st.write("Ex.: 'Write an email to Mary asking for the financial report.'")
+st.write("Click on the microphone and start recording. Click again to stop.")
 
 st.sidebar.title("Secretary GPT")
 
