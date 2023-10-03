@@ -1,27 +1,14 @@
 import streamlit as st
 import whisper
-import sounddevice as sd
-import soundfile as sf
 
 # Función para transcribir notas de voz
-def transcribir_notas_de_voz():
-    # Botón para iniciar la grabación
-    if st.button("Iniciar Grabación"):
-        # Configurar parámetros de grabación
-        duration = 10  # Duración de la grabación en segundos
-        sample_rate = 44100  # Tasa de muestreo en Hz
-        channels = 1  # Número de canales de audio
+def transcribir_notas_de_voz(api_key):
+    # Cargar el archivo de audio
+    audio_file = st.file_uploader("Cargar archivo de audio", type=["wav", "mp3"])
 
-        # Grabar audio
-        audio = sd.rec(int(duration * sample_rate), samplerate=sample_rate, channels=channels)
-        sd.wait()  # Esperar a que termine la grabación
-
-        # Guardar audio en archivo temporal
-        audio_file = "temp.wav"
-        sf.write(audio_file, audio, sample_rate)
-
+    if audio_file is not None:
         # Crear un objeto de transcripción
-        transcriptor = whisper.Transcriber(language='es')
+        transcriptor = whisper.Transcriber(api_key=api_key, language='es')
 
         # Transcribir el audio
         transcripcion = transcriptor.transcribe(audio_file)
@@ -33,5 +20,9 @@ def transcribir_notas_de_voz():
 # Título de la aplicación
 st.title("Transcripción de Notas de Voz en Español")
 
-# Transcribir notas de voz
-transcribir_notas_de_voz()
+# Solicitar la clave API al usuario
+api_key = st.text_input("Introduce tu clave API de OpenAI")
+
+# Transcribir notas de voz si se proporciona una clave API
+if api_key:
+    transcribir_notas_de_voz(api_key)
