@@ -3,8 +3,6 @@ import sys
 import datetime
 import openai
 import streamlit as st
-
-
 from audio_recorder_streamlit import audio_recorder
 
 working_dir = os.path.dirname(os.path.abspath(__file__))
@@ -25,18 +23,6 @@ def transcribe(audio_file):
     return transcript
 
 
-def summarize(text):
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=(
-            f"Please do what you are asked to do with the following text:\n"
-            f"{text}"
-        ),
-        temperature=0.5,
-        max_tokens=3160,
-    )
-
-    return response.choices[0].text.strip()
 st.image("https://asesorialinguistica.online/wp-content/uploads/2023/04/Secretary-GPT.png")
 
 st.write("Click on the microphone and tell your GPT secretary what to type.")
@@ -74,7 +60,6 @@ with tab2:
     audio_file = st.file_uploader("Upload Audio", type=["mp3", "mp4", "wav", "m4a"])
 
     if audio_file:
-        # st.audio(audio_file.read(), format={audio_file.type})
         timestamp = timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
         # save audio file with correct extension
         with open(f"audio_{timestamp}.{audio_file.type.split('/')[1]}", "wb") as f:
@@ -101,21 +86,12 @@ if st.button("Transcribe"):
     st.header("Transcript")
     st.write(text)
 
-    # summarize
-    summary = summarize(text)
-
-    st.header("Document")
-    st.write(summary)
-
-    # save transcript and summary to text files
+    # save transcript to text file
     with open("transcript.txt", "w") as f:
         f.write(text)
 
-    with open("document.txt", "w") as f:
-        f.write(summary)
-
-    # download transcript and summary
-    st.download_button('Download Document', summary)
+    # download transcript
+    st.download_button('Download Transcript', text)
 
 # delete audio and text files when leaving app
 if not st.session_state.get('cleaned_up'):
