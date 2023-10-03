@@ -2,3 +2,4 @@ streamlit
 sounddevice
 soundfile
 whisper
+openai
