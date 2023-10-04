@@ -23,7 +23,7 @@ def transcribe(audio_file):
     return transcript
 
 
-st.image("https://arjeapps.com/wp-content/uploads/2023/10/secretary.jpg")
+st.title("Voice notes transcriptor")
 
 st.sidebar.title("Secretary GPT")
 
