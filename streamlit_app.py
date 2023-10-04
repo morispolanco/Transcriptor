@@ -25,8 +25,6 @@ def transcribe(audio_file):
 
 st.image("https://arjeapps.com/wp-content/uploads/2023/10/secretary.jpg")
 
-st.write("Click on the microphone and start recording. Click again to stop.")
-
 st.sidebar.title("Secretary GPT")
 
 # Explanation of the app
@@ -45,7 +43,7 @@ st.sidebar.markdown("""
 tab1, tab2 = st.tabs(["Record Audio", "Upload Audio"])
 
 with tab1:
-    audio_bytes = audio_recorder(pause_threshold=180)
+    audio_bytes = audio_recorder(pause_threshold=300)
     if audio_bytes:
         st.audio(audio_bytes, format="audio/wav")
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
